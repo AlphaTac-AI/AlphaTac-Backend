@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dota一血分析</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script th:src="@{js/jquery/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{js/jquery/jquery.serializejson.js}"></script>
+    <link th:href="@{bootstrap/css/bootstrap.css}" rel="stylesheet"/>
+    <script th:src="@{bootstrap/js/bootstrap.js}"></script>
+    <script th:src="@{js/element_control.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" th:src="@{images/dota/logo.jpg}" alt="" width="92" height="92">
+        <h2>AI：Dota2一血分析</h2>
+        <p class="lead">本AI基于Stream上的几乎所有比赛数据，并根据神经网络机器学习机制进行学习，
+            用户只要输入比赛前的Ban英雄数据，AI会分析出哪一方最有可能获得一血。</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 order-md-12 mb-12 padding-0">
+            <form id="game_predata"  method="post">
+                <div class="row">
+                    <div class="col-md-6 order-md-6 mb-6 bg-danger ">
+                        <h3 class="text-center">天辉</h3>
+                        <img class="d-block mx-auto mb-4" th:src="@{images/dota/tianhui.jpg}" alt="" width=80%
+                             height=calc(width*0.75)>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" name="first-choose-radio" id="tianhui-radio"
+                                       value="tianhui" checked>
+                                先选方
+                            </label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tianhui-team-name" class="col-4 col-form-label">队伍名称：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="WE" id="tianhui-team-name" name="tianhui-team-name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tianhui-first-choose" class="col-4 col-form-label">第1个pick英雄：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="" id="tianhui-first-choose" name="tianhui-first-choose">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tianhui-second-choose" class="col-4 col-form-label">第2个pick英雄：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="" id="tianhui-second-choose" name="tianhui-second-choose">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tianhui-third-choose" class="col-4 col-form-label">第3个pick英雄：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="" id="tianhui-third-choose" name="tianhui-third-choose">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tianhui-forth-choose" class="col-4 col-form-label">第4个pick英雄：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="" id="tianhui-forth-choose" name="tianhui-forth-choose">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="tianhui-fifth-choose" class="col-4 col-form-label">第5个pick英雄：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="" id="tianhui-fifth-choose" name="tianhui-fifth-choose">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 order-md-6 mb-6 bg-dark text-white">
+                        <h3 class="text-center ">夜魇</h3>
+                        <img class="d-block mx-auto mb-4" th:src="@{images/dota/yeyan.jpg}" alt="" width=80%
+                             height=calc(width*0.75)>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" name="first-choose-radio" id="yeyan-radio"
+                                       value="yeyan">
+                                先选方
+                            </label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="yeyan-team-name" class="col-4 col-form-label">队伍名称：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="WE" id="yeyan-team-name" name="yeyan-team-name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="yeyan-first-choose" class="col-4 col-form-label">第1个pick英雄：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="" id="yeyan-first-choose" name="yeyan-first-choose">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="yeyan-second-choose" class="col-4 col-form-label">第2个pick英雄：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="" id="yeyan-second-choose" name="yeyan-second-choose">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="yeyan-third-choose" class="col-4 col-form-label">第3个pick英雄：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="" id="yeyan-third-choose" name="yeyan-third-choose">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="yeyan-forth-choose" class="col-4 col-form-label">第4个pick英雄：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="" id="yeyan-forth-choose" name="yeyan-forth-choose">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="yeyan-fifth-choose" class="col-4 col-form-label">第5个pick英雄：</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" value="" id="yeyan-fifth-choose" name="yeyan-fifth-choose">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 order-md-12 mb-12 py-2 text-center">
+                    <button id="submit_form_button" type="button" class="btn btn-primary" >提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
