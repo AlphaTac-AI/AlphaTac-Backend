@@ -1,5 +1,7 @@
 package com.dice.dota.firstblood.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -14,8 +16,10 @@ import java.util.Map;
 
 @Controller
 public class HomePageController {
+    final private Logger logger = LoggerFactory.getLogger(HomePageController.class);
     @RequestMapping(value = "/",method = RequestMethod.GET)
     String homePage(){
+        logger.info("Someone visited homePage");
         return "homepage";
     }
 
